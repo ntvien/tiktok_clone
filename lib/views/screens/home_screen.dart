@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           BottomNavigationBarItem(
             icon: CustomIcon(),
-            label: "Home",
+            label: "",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.message, size: 30),

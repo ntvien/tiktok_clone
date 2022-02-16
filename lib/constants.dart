@@ -3,11 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:tiktok/controllers/auth_controller.dart';
+import 'package:tiktok/views/screens/add_video_screen.dart';
 
 List pages = [
   Text("Home Screen"),
   Text("Search Screen"),
-  Text("Add Screen"),
+  AddVideoScreen(),
   Text("Message Screen"),
   Text("Profile Screen"),
 ];
