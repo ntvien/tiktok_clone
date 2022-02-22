@@ -18,21 +18,21 @@ class ConfirmScreen extends StatefulWidget {
 
 class _ConfirmScreenState extends State<ConfirmScreen> {
 
-  late VideoPlayerController controller;
+  late VideoPlayerController _controller;
 
-  TextEditingController _songController = TextEditingController();
-  TextEditingController _captionController = TextEditingController();
+  final TextEditingController _songController = TextEditingController();
+  final TextEditingController _captionController = TextEditingController();
 
   @override
-  void setState(VoidCallback fn) {
-    super.setState(fn);
+  void initState() {
+    super.initState();
     setState(() {
-      controller = VideoPlayerController.file(widget.videoFile);
+      _controller = VideoPlayerController.file(widget.videoFile);
     });
-    controller.initialize();
-    controller.play();
-    controller.setVolume(1);
-    controller.setLooping(true);
+    _controller.initialize();
+    _controller.play();
+    _controller.setVolume(1);
+    _controller.setLooping(true);
   }
 
   @override
@@ -45,7 +45,7 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
             SizedBox(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
-              child: VideoPlayer(controller),
+              child: VideoPlayer(_controller),
             ),
             const SizedBox(height: 30),
             SingleChildScrollView(
