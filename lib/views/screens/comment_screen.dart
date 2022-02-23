@@ -4,17 +4,23 @@ import 'package:tiktok/constants.dart';
 import 'package:tiktok/controllers/comment_controller.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-class CommentScreen extends StatelessWidget {
+class CommentScreen extends StatefulWidget {
   final String id;
   CommentScreen({Key? key, required this.id}) : super(key: key);
 
+  @override
+  State<CommentScreen> createState() => _CommentScreenState();
+}
+
+class _CommentScreenState extends State<CommentScreen> {
   final TextEditingController _commentController = TextEditingController();
+
   CommentController commentController = Get.put(CommentController());
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    commentController.updatePostId(id);
+    commentController.updatePostId(widget.id);
 
     return Scaffold(
       body: SingleChildScrollView(
