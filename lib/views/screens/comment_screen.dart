@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tiktok/constants.dart';
 import 'package:tiktok/controllers/comment_controller.dart';
-import 'package:timeago/timeago.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class CommentScreen extends StatelessWidget {
   final String id;
@@ -36,7 +37,7 @@ class CommentScreen extends StatelessWidget {
                       title: Row(
                         children: [
                           Text(
-                            comment.username,
+                            "${comment.username}",
                             style: TextStyle(
                               fontSize: 20,
                               color: Colors.red,
@@ -56,24 +57,26 @@ class CommentScreen extends StatelessWidget {
                       subtitle: Row(
                         children: [
                           Text(
-                            tago.format(comment.datePublished.toDate()),
+                            timeago.format(comment.datePublished.toDate()),
                             style: TextStyle(fontSize: 12, color: Colors.white),
                           ),
                           const SizedBox(
                             width: 10,
                           ),
                           Text(
-                            "10 likes",
+                            '${comment.likes.length} likes',
                             style: TextStyle(fontSize: 12, color: Colors.white),
                           )
                         ],
                       ),
                       trailing: InkWell(
-                        onTap: () {},
+                        onTap: () => commentController.likeComment(comment.id),
                         child: Icon(
                           Icons.favorite,
                           size: 25,
-                          color: Colors.red,
+                          color: comment.likes.contains(authController.user!.uid)
+                              ? Colors.red
+                              : Colors.white,
                         ),
                       ),
                     );
@@ -101,7 +104,8 @@ class CommentScreen extends StatelessWidget {
                 ),
               ),
               trailing: TextButton(
-                onPressed: () => commentController.postComment(_commentController.text),
+                onPressed: () =>
+                    commentController.postComment(_commentController.text),
                 child: const Text(
                   "Send",
                   style: TextStyle(fontSize: 15, color: Colors.white),
